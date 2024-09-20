@@ -1,0 +1,35 @@
+{
+  "{{chrome}}.manifest_version": 3,
+  "{{firefox}}.manifest_version": 2,
+  "icons": {
+    "16": "icon/16.png",
+    "32": "icon/32.png",
+    "48": "icon/48.png",
+    "96": "icon/96.png",
+    "128": "icon/128.png"
+  },
+  "{{chrome}}.action": {
+    "default_popup": "src/popup.html"
+  },
+  "{{firefox}}.browser_action": {
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "{{chrome}}.service_worker": "src/background.ts",
+    "{{firefox}}.scripts": ["src/background.ts"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://exportxbookmarks.com/*",
+        "https://exportxbookmarks.test/*"
+      ],
+      "js": ["src/content.ts"]
+    }
+  ],
+  "version": "1.1",
+  "name": "Export X Bookmarks",
+  "description": "Export and analyze your X bookmarks with AI to get insights that drive action.",
+  "permissions": ["storage", "webRequest"],
+  "host_permissions": ["*://*.twitter.com/*", "*://*.x.com/*"]
+}
