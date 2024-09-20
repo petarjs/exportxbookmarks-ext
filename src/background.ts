@@ -285,20 +285,22 @@ const extractHeaders = (
   };
 };
 
-// Listener for runtime messages
-chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-  if (request.type === "getBookmarks") {
-    const { bookmarks } = await chrome.storage.local.get(["bookmarks"]);
-    // @ts-ignore
-    sendResponse({ bookmarks });
-    return true;
-  } else if (request.type === "batchImportAll") {
-    console.log("Starting import");
-    await chrome.storage.local.remove(["bookmarks"]);
-    batchImportAll();
-    return true;
+// Function to handle the message, regardless of its source
+const handleMessage = async (request: any, sender: any, sendResponse: any) => {
+  if (request.type === "requestBookmarks") {
+    // Your logic to handle the requestBookmarks message
+    console.log("Received requestBookmarks message");
+    // Add your implementation here
   }
-});
+
+  // Add other message type handlers as needed
+};
+
+// Listen for messages from the extension itself (for local development)
+chrome.runtime.onMessage.addListener(handleMessage);
+
+// Listen for messages from external sources (for production)
+chrome.runtime.onMessageExternal.addListener(handleMessage);
 
 // Listener for installation events
 chrome.runtime.onInstalled.addListener((details) => {});

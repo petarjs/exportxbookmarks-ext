@@ -27,9 +27,12 @@
       "js": ["src/content.ts"]
     }
   ],
-  "version": "1.1",
+  "version": "1.3",
   "name": "Export X Bookmarks",
   "description": "Export and analyze your X bookmarks with AI to get insights that drive action.",
   "permissions": ["storage", "webRequest"],
-  "host_permissions": ["*://*.twitter.com/*", "*://*.x.com/*"]
+  "host_permissions": ["*://*.twitter.com/*", "*://*.x.com/*"],
+  "externally_connectable": {
+    "matches": ["https://exportxbookmarks.com/*"]
+  }
 }
