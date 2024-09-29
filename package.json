@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "NODE_ENV=production vite build",
     "build:dev": "NODE_ENV=development vite build",
-    "watch": "tsc && vite build --watch --mode development"
+    "watch": "tsc && vite build --watch --mode development",
+    "package": "npm run build && cd dist && zip -r ~/Desktop/exportx-ext.zip ."
   },
   "dependencies": {
     "react": "^18.2.0",

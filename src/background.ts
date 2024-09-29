@@ -290,10 +290,19 @@ const handleMessage = async (request: any, sender: any, sendResponse: any) => {
   if (request.type === "requestBookmarks") {
     // Your logic to handle the requestBookmarks message
     console.log("Received requestBookmarks message");
-    // Add your implementation here
+
+    const { bookmarks } = await chrome.storage.local.get(["bookmarks"]);
+    // @ts-ignore
+    sendResponse({ bookmarks });
+    return true;
   }
 
-  // Add other message type handlers as needed
+  if (request.type === "batchImportAll") {
+    console.log("Starting import");
+    await chrome.storage.local.remove(["bookmarks"]);
+    batchImportAll();
+    return true;
+  }
 };
 
 // Listen for messages from the extension itself (for local development)
